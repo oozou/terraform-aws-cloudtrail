@@ -1,5 +1,5 @@
 module "centralize_log_bucket" {
-  count  = local.account_mode_count == 1 ? 1 : 0
+  count  = 1 - local.account_mode
   source = "git@github.com:oozou/terraform-aws-s3?ref=v1.0.1"
 
   prefix      = "account"

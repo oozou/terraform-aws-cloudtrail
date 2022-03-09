@@ -1,12 +1,9 @@
+# locals for using as references.
 locals {
-  check_kms_key_spoke_empty   = var.account_mode == "SPOKE" && var.kms_key_id == "" ? file("If account_mode is SPOKE, kms_key_id must not be empty.") : null
-  check_s3_bucket_spoke_empty = var.account_mode == "SPOKE" && var.centralize_trail_bucket_name == "" ? file("If account_mode is SPOKE, centralize_trail_bucket_name must not be empty.") : null
+  #spoke = 1, hub = 0
+  account_mode = lower(var.account_mode) != "hub" ? 1 : 0
 
-  check_kms_key_hub_not_empty   = var.account_mode == "HUB" && var.kms_key_id != "" ? file("If account_mode is HUB, kms_key_id must be empty.") : null
-  check_s3_bucket_hub_not_empty = var.account_mode == "HUB" && var.centralize_trail_bucket_name != "" ? file("If account_mode is HUB, centralize_trail_bucket_name must be empty.") : null
-  name                          = "account-${var.environment}-monitor-trail"
-
-  account_mode_count = var.account_mode == "HUB" ? 1 : 0
+  name = "account-${var.environment}-monitor-trail"
 
   account_ids = concat(var.spoke_account_ids, [data.aws_caller_identity.current.account_id])
 
@@ -23,4 +20,14 @@ locals {
     },
     var.tags
   )
+}
+
+# preflight locals for checking valid input variables.
+locals {
+  #spoke check
+  check_kms_key_spoke_empty   = local.account_mode == 1 && var.kms_key_id == "" ? file("If account_mode is SPOKE, kms_key_id must not be empty.") : null
+  check_s3_bucket_spoke_empty = local.account_mode == 1 && var.centralize_trail_bucket_name == "" ? file("If account_mode is SPOKE, centralize_trail_bucket_name must not be empty.") : null
+  #hub check
+  check_kms_key_hub_not_empty   = local.account_mode == 0 && var.kms_key_id != "" ? file("If account_mode is HUB, kms_key_id must be empty.") : null
+  check_s3_bucket_hub_not_empty = local.account_mode == 0 && var.centralize_trail_bucket_name != "" ? file("If account_mode is HUB, centralize_trail_bucket_name must be empty.") : null
 }

@@ -2,7 +2,7 @@
 /*                                   AWS_KMS                                  */
 /* -------------------------------------------------------------------------- */
 module "cloudtrail_kms" {
-  count = local.account_mode_count == 1 && var.cloudtrail_encrypted ? 1 : 0
+  count = 1 - local.account_mode
 
   source      = "git@github.com:oozou/terraform-aws-kms-key.git?ref=v0.0.2"
   key_type    = "service"

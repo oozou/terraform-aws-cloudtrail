@@ -1,5 +1,5 @@
 data "aws_iam_policy_document" "kms_cloudtrail" {
-  count = local.account_mode_count
+  count = 1 - local.account_mode
   statement {
     sid    = "Enable CloudTrail Key Permission"
     effect = "Allow"
@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "kms_cloudtrail" {
 }
 
 data "aws_iam_policy_document" "s3_cloudtrail" {
-  count = local.account_mode_count
+  count = 1 - local.account_mode
   statement {
     sid    = "AWSCloudTrailAclCheck"
     effect = "Allow"
