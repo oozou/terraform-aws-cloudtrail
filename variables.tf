@@ -6,7 +6,7 @@ variable "environment" {
   type        = string
 }
 
-variable "custom_tags" {
+variable "tags" {
   description = "Tags to add more; default tags contian {terraform=true, environment=var.environment}"
   type        = map(string)
   default     = {}
@@ -27,13 +27,14 @@ variable "cloudtrail_encrypted" {
   default     = true
 }
 
-variable "centralize_trail_logging_bucket_name" {
-  description = "S3 bucket for store Cloudtrail log (long terms)"
+variable "centralize_trail_bucket_name" {
+  description = "S3 bucket for store Cloudtrail log (long terms), leave this default if account_mode is HUB. If account_mode is SPOKE, please provide centrailize S3 bucket name (HUB)."
   type        = string
+  default     = ""
 }
 
 variable "kms_key_id" {
-  description = "The ARN for the KMS encryption key. If creating an encrypted, set this to the destination KMS ARN. If cloudtrail_encrypted is set to true and kms_key_id is not specified terraform will create new kms to be used."
+  description = "The ARN for the KMS encryption key. Leave this default if account_mode is HUB. If account_mode is SPOKE, please provide centrailize kms key arn (HUB)."
   type        = string
   default     = ""
 }
@@ -77,3 +78,39 @@ variable "event_selector" {
   default = []
 }
 
+/* -------------------------------------------------------------------------- */
+/*                            Account Configuration                           */
+/* -------------------------------------------------------------------------- */
+variable "account_mode" {
+  description = "Account mode for provision cloudtrail, if account_mode is HUB, will provision S3, KMS, CloudTrail. if account_mode is SPOKE, will provision only CloudTrail"
+  type        = string
+  validation {
+    condition     = contains(["HUB", "SPOKE"], var.account_mode)
+    error_message = "Valid values for account_mode are HUB and SPOKE."
+  }
+}
+
+variable "spoke_account_ids" {
+  description = "Spoke account Ids, if mode is hub."
+  type        = list(string)
+  default     = []
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  S3 Bucket                                 */
+/* -------------------------------------------------------------------------- */
+
+variable "centralize_trail_bucket_lifecycle_rule" {
+  description = "List of lifecycle rules to transition the data. Leave empty to disable this feature. storage_class can be STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE"
+  type = list(object({
+    id = string
+
+    transition = list(object({
+      days          = number
+      storage_class = string
+    }))
+
+    expiration_days = number
+  }))
+  default = []
+}
