@@ -16,9 +16,9 @@ module "centralize_log_bucket" {
 
   lifecycle_rules = var.centralize_trail_bucket_lifecycle_rule
 
-  tags = var.tags
-
   additional_bucket_polices = [data.aws_iam_policy_document.s3_cloudtrail[count.index].json]
 
   kms_key_arn = { kms_arn = local.kms_key_id }
+
+  tags = var.tags
 }

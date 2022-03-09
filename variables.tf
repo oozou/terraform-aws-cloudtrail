@@ -28,13 +28,13 @@ variable "cloudtrail_encrypted" {
 }
 
 variable "centralize_trail_bucket_name" {
-  description = "S3 bucket for store Cloudtrail log (long terms), leave this default if account_mode is HUB. If account_mode is SPOKE, please provide centrailize S3 bucket name (HUB)."
+  description = "S3 bucket for store Cloudtrail log (long terms), leave this default if account_mode is hub. If account_mode is SPOKE, please provide centrailize S3 bucket name (hub)."
   type        = string
   default     = ""
 }
 
 variable "kms_key_id" {
-  description = "The ARN for the KMS encryption key. Leave this default if account_mode is HUB. If account_mode is SPOKE, please provide centrailize kms key arn (HUB)."
+  description = "The ARN for the KMS encryption key. Leave this default if account_mode is hub. If account_mode is SPOKE, please provide centrailize kms key arn (hub)."
   type        = string
   default     = ""
 }
@@ -82,11 +82,11 @@ variable "event_selector" {
 /*                            Account Configuration                           */
 /* -------------------------------------------------------------------------- */
 variable "account_mode" {
-  description = "Account mode for provision cloudtrail, if account_mode is HUB, will provision S3, KMS, CloudTrail. if account_mode is SPOKE, will provision only CloudTrail"
+  description = "Account mode for provision cloudtrail, if account_mode is hub, will provision S3, KMS, CloudTrail. if account_mode is spoke, will provision only CloudTrail"
   type        = string
   validation {
-    condition     = contains(["HUB", "SPOKE"], var.account_mode)
-    error_message = "Valid values for account_mode are HUB and SPOKE."
+    condition     = contains(["hub", "spoke"], var.account_mode)
+    error_message = "Valid values for account_mode are hub and spoke."
   }
 }
 
