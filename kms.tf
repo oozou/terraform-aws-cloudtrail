@@ -8,7 +8,7 @@ module "cloudtrail_kms" {
   key_type    = "service"
   description = "Used to encrypt data in for account centralize monitor trail"
   prefix      = var.prefix
-  name        = "account-monitor-trail"
+  name        = "account-trail"
   environment = "centralize"
 
   additional_policies = [data.aws_iam_policy_document.kms_cloudtrail[count.index].json]

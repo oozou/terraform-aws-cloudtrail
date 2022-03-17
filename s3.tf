@@ -3,7 +3,7 @@ module "centralize_log_bucket" {
   source = "git@github.com:oozou/terraform-aws-s3?ref=v1.0.1"
 
   prefix      = var.prefix
-  bucket_name = "account-monitor-trail"
+  bucket_name = "account-trail"
   environment = "centralize"
 
   centralize_hub     = true
