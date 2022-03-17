@@ -3,7 +3,7 @@ locals {
   #spoke = 1, hub = 0
   account_mode = var.account_mode != "hub" ? 1 : 0
 
-  name = "${var.prefix}-${var.environment}-monitor-trail"
+  name = "${var.prefix}-${var.environment}-trail"
 
   account_ids = concat(var.spoke_account_ids, [data.aws_caller_identity.current.account_id])
 
