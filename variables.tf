@@ -1,6 +1,11 @@
 /* -------------------------------------------------------------------------- */
 /*                                  GENERICS                                  */
 /* -------------------------------------------------------------------------- */
+variable "prefix" {
+  description = "The prefix name of customer to be displayed in AWS console and resource"
+  type        = string
+}
+
 variable "environment" {
   description = "Environment name used as environment resources name."
   type        = string

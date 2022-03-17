@@ -3,7 +3,7 @@ locals {
   #spoke = 1, hub = 0
   account_mode = var.account_mode != "hub" ? 1 : 0
 
-  name = "account-${var.environment}-monitor-trail"
+  name = "${var.prefix}-${var.environment}-monitor-trail"
 
   account_ids = concat(var.spoke_account_ids, [data.aws_caller_identity.current.account_id])
 
@@ -11,7 +11,7 @@ locals {
 
   kms_key_id = var.kms_key_id != "" ? var.kms_key_id : join("", module.cloudtrail_kms.*.key_arn)
 
-  centralize_log_bucket_arn = var.centralize_trail_bucket_name == "" ? join("", [module.centralize_log_bucket[0].bucket_arn]) : join("", ["arn:aws:s3:::", var.centralize_trail_bucket_name])
+  centralize_log_bucket_arn = var.centralize_trail_bucket_name == "" ? try(module.centralize_log_bucket[0].bucket_arn, "") : join("", ["arn:aws:s3:::", var.centralize_trail_bucket_name])
 
   tags = merge(
     {
