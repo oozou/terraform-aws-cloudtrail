@@ -23,6 +23,7 @@ data "aws_iam_policy_document" "kms_cloudtrail" {
     }
   }
 
+  # TODO RESTRICT
   statement {
     sid    = "Allow CloudWatch log Key Permission"
     effect = "Allow"
@@ -41,7 +42,7 @@ data "aws_iam_policy_document" "kms_cloudtrail" {
     condition {
       test     = "ArnLike"
       variable = "kms:EncryptionContext:aws:logs:arn"
-      values   = ["${aws_cloudwatch_log_group.trail_log[0].arn}:*"]
+      values   = ["arn:aws:logs:ap-southeast-1:*:log-group:/aws/cloudtrail/${local.name}*"]
     }
   }
 

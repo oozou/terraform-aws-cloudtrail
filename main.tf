@@ -57,7 +57,7 @@ resource "aws_cloudwatch_log_group" "trail_log" {
   count             = var.is_create_monitor_trail ? 1 : 0
   name              = "/aws/cloudtrail/${local.name}"
   retention_in_days = var.cloudwatch_log_retention_in_days
-  kms_key_id        = ""
+  kms_key_id        = local.kms_key_id
 
   tags = merge(local.tags, { Name = "/aws/cloudtrail/${local.name}" })
 }
