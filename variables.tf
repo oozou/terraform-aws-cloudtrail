@@ -26,6 +26,12 @@ variable "is_create_monitor_trail" {
   default     = true
 }
 
+variable "trail_log_retention_in_days" {
+  description = "(optional) describe your variable"
+  type        = number
+  defualt     = 90
+}
+
 variable "cloudtrail_encrypted" {
   description = "Whether Cloudtrail encryption enable or not."
   type        = bool
@@ -43,7 +49,6 @@ variable "kms_key_id" {
   type        = string
   default     = ""
 }
-
 
 variable "enable_log_file_validation" {
   description = "Specifies whether log file integrity validation is enabled. Creates signed digest for validated contents of logs"
