@@ -47,7 +47,7 @@ variable "centralize_trail_bucket_name" {
 variable "kms_key_id" {
   description = "The ARN for the KMS encryption key. Leave this default if account_mode is hub. If account_mode is SPOKE, please provide centrailize kms key arn (hub)."
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "enable_log_file_validation" {
