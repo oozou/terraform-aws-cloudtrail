@@ -26,10 +26,10 @@ variable "is_create_monitor_trail" {
   default     = true
 }
 
-variable "trail_log_retention_in_days" {
+variable "cloudwatch_log_retention_in_days" {
   description = "(optional) describe your variable"
   type        = number
-  defualt     = 90
+  default     = 90
 }
 
 variable "cloudtrail_encrypted" {
