@@ -13,7 +13,7 @@ module "hub_cloudtrail" {
   tags = {
     "Workspace" = "<workspace_name>"
   }
-  account_mode = "HUB"
+  account_mode = "hub"
 
   spoke_account_ids = [
     "<spoke_account_id_1>",
@@ -66,7 +66,7 @@ module "spoke_cloudtrail" {
   tags = {
     "Workspace" = "<workspace_name>"
   }
-  account_mode = "SPOKE"
+  account_mode = "spoke"
 
   centralize_trail_bucket_name = "<hub_centralize_trail_logs_bucket_name>"
   kms_key_id                           = "<hub_centralize_trail_kms_arn>"
