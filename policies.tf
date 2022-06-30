@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "kms_cloudtrail" {
     condition {
       test     = "ArnLike"
       variable = "kms:EncryptionContext:aws:logs:arn"
-      values   = ["arn:aws:logs:ap-southeast-1:*:log-group:/aws/cloudtrail/${local.name}*"]
+      values   = ["arn:aws:logs:ap-southeast-1:*:log-group:/aws/cloudtrail/${var.prefix}-*"]
     }
   }
 
