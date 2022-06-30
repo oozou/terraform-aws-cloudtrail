@@ -23,6 +23,29 @@ data "aws_iam_policy_document" "kms_cloudtrail" {
     }
   }
 
+  # TODO RESTRICT
+  statement {
+    sid    = "Allow CloudWatch log Key Permission"
+    effect = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["logs.amazonaws.com"]
+    }
+    actions = [
+      "kms:Encrypt*",
+      "kms:Decrypt*",
+      "kms:ReEncrypt*",
+      "kms:GenerateDataKey*",
+      "kms:Describe*"
+    ]
+    resources = ["*"]
+    condition {
+      test     = "ArnLike"
+      variable = "kms:EncryptionContext:aws:logs:arn"
+      values   = ["arn:aws:logs:ap-southeast-1:*:log-group:/aws/cloudtrail/${var.prefix}-*"]
+    }
+  }
+
   statement {
     sid    = "Allow AWS Services to use the key"
     effect = "Allow"

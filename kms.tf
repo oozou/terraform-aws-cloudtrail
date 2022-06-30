@@ -4,7 +4,7 @@
 module "cloudtrail_kms" {
   count = 1 - local.account_mode
 
-  source      = "git@github.com:oozou/terraform-aws-kms-key.git?ref=v0.0.2"
+  source      = "git@github.com:oozou/terraform-aws-kms-key.git?ref=v1.0.0"
   key_type    = "service"
   description = "Used to encrypt data in for account centralize monitor trail"
   prefix      = var.prefix
