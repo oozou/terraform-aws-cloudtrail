@@ -1,6 +1,8 @@
 # Account Info Hub
 data "aws_caller_identity" "current" {}
 
+data "aws_region" "current" {}
+
 /* -------------------------------------------------------------------------- */
 /*                    Cloudtrail access CloudWatch role                       */
 /* -------------------------------------------------------------------------- */
@@ -62,6 +64,41 @@ resource "aws_cloudwatch_log_group" "trail_log" {
   tags = merge(local.tags, { Name = "/aws/cloudtrail/${local.name}" })
 }
 
+module "alarm" {
+  for_each = var.is_create_monitor_trail ? toset(local.enable_cloudwatch_log_metric_filters) : toset([])
+
+  source = "git@github.com:oozou/terraform-aws-cloudwatch-alarm?ref=feature/cloudwatch-alarm"
+
+  prefix      = var.prefix
+  environment = var.environment
+  name        = format("trail-%s", replace(each.key, "_", "-"))
+
+  comparison_operator = local.comparison_operators[lookup(local.metric_filters[each.key], "comparison_operator", null)]
+  evaluation_periods  = lookup(local.metric_filters[each.key], "evaluation_periods", null)
+  metric_name         = format("%s-%s-metric", local.name, replace(each.key, "_", "-"))
+  namespace           = lookup(local.metric_filters[each.key], "namespace", "CloudTrailMetrics")
+  period              = lookup(local.metric_filters[each.key], "period", null)
+  statistic           = lookup(local.metric_filters[each.key], "statistic", "Sum")
+  threshold           = lookup(local.metric_filters[each.key], "threshold", null)
+
+  alarm_actions = lookup(local.metric_filters[each.key], "alarm_actions", var.default_alarm_actions)
+
+  tags = var.tags
+}
+
+resource "aws_cloudwatch_log_metric_filter" "this" {
+  for_each = var.is_create_monitor_trail ? toset(local.enable_cloudwatch_log_metric_filters) : toset([])
+
+  name           = format("%s-%s-filter", local.name, replace(each.key, "_", "-"))
+  pattern        = lookup(local.metric_filters[each.key], "pattern", null)
+  log_group_name = aws_cloudwatch_log_group.trail_log[0].name
+
+  metric_transformation {
+    name      = format("%s-%s-metric", local.name, replace(each.key, "_", "-"))
+    namespace = lookup(local.metric_filters[each.key], "namespace", "CloudTrailMetrics")
+    value     = lookup(local.metric_filters[each.key], "metric_transformation_value", "1")
+  }
+}
 
 /* -------------------------------------------------------------------------- */
 /*                           CloudTrail Rule                                  */
