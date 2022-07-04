@@ -8,11 +8,8 @@
 module "hub_cloudtrail" {
   source = "git@github.com:oozou/terraform-aws-cloudtrail.git?ref=<ref_id>"
 
-  prefix = "<customer_name>"
-  environment = "devops"
-  tags = {
-    "Workspace" = "<workspace_name>"
-  }
+  prefix       = "<customer_name>"
+  environment  = "devops"
   account_mode = "hub"
 
   spoke_account_ids = [
@@ -52,7 +49,30 @@ module "hub_cloudtrail" {
       expiration_days = 3660
     }
   ]
+
+  enable_cloudwatch_log_metric_filters = ["authorization_failures"] # SELECT THE DEFUALT SETTING
+  additional_cloudwatch_log_metric_filters = {
+    authorization_failures = { # SAME KEY WILL OVERRIDE THE DEFAULT ONE
+      comparison_operator = ">="
+      threshold           = "50"
+      evaluation_periods  = "1"
+      period              = "300"
+      pattern             = "{ ($.errorCode = \"*UnauthorizedOperation\") || ($.errorCode = \"AccessDenied*\") }"
+      alarm_actions       = []
+    }
+    custome_metric_filter = {
+      comparison_operator = ">="
+      threshold           = "10"
+      evaluation_periods  = "1"
+      period              = "60"
+      pattern             = "<pattern>"
+      alarm_actions       = ["arn:aws:sns:ap-southeast-1:557291035693:alarm"]
+    }
+  }
+
+  tags = var.generics_info["custom_tags"]
 }
+
 ```
 
 **SPOKE Account**
