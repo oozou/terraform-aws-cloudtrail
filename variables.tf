@@ -74,7 +74,7 @@ variable "default_alarm_actions" {
   default     = []
 }
 
-variable "cloudtrail_encrypted" {
+variable "is_cloudtrail_encrypted" {
   description = "Whether Cloudtrail encryption enable or not."
   type        = bool
   default     = true

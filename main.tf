@@ -112,7 +112,7 @@ resource "aws_cloudtrail" "this" {
   cloud_watch_logs_group_arn    = "${aws_cloudwatch_log_group.trail_log[count.index].arn}:*"
   cloud_watch_logs_role_arn     = aws_iam_role.cloudtrail_put_log_cw[count.index].arn
   enable_log_file_validation    = var.enable_log_file_validation
-  kms_key_id                    = var.cloudtrail_encrypted ? local.kms_key_id : null
+  kms_key_id                    = var.is_cloudtrail_encrypted ? local.kms_key_id : null
   is_multi_region_trail         = var.is_multi_region_trail
   enable_logging                = var.enable_logging
   dynamic "event_selector" {
