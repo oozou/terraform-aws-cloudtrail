@@ -2,6 +2,12 @@
 
 All notable changes to this module will be documented in this file.
 
+## [1.0.3] - 2022-07-18
+
+### Changed
+
+- change kms policy for support another region
+
 ## [1.0.2] - 2022-07-12
 
 ### Changed

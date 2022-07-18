@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "kms_cloudtrail" {
     condition {
       test     = "ArnLike"
       variable = "kms:EncryptionContext:aws:logs:arn"
-      values   = ["arn:aws:logs:ap-southeast-1:*:log-group:/aws/cloudtrail/${var.prefix}-*"]
+      values   = ["arn:aws:logs:${data.aws_region.this.name}:*:log-group:/aws/cloudtrail/${var.prefix}-*"]
     }
   }
 
@@ -66,8 +66,8 @@ data "aws_iam_policy_document" "kms_cloudtrail" {
       test     = "StringEquals"
       variable = "kms:ViaService"
       values = [
-        "s3.ap-southeast-1.amazonaws.com",
-        "lambda.ap-southeast-1.amazonaws.com"
+        "s3.${data.aws_region.this.name}.amazonaws.com",
+        "lambda.${data.aws_region.this.name}.amazonaws.com"
       ]
     }
   }
