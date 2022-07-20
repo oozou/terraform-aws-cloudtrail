@@ -11,6 +11,11 @@ All notable changes to this module will be documented in this file.
     - Add `var.additional_cloudwatch_log_metric_filters` to override or add additional custom metric filter
     - Add cloudwatch alarm action `var.default_alarm_actions` to override all actions for all metric filter
 - Rename `data.aws_region` from `current` to `this`
+## [1.0.3] - 2022-07-18
+
+### Changed
+
+- change kms policy for support another region
 
 ## [1.0.2] - 2022-07-12
 
