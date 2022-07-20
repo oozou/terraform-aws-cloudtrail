@@ -1,8 +1,3 @@
-# Account Info Hub
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
 /* -------------------------------------------------------------------------- */
 /*                    Cloudtrail access CloudWatch role                       */
 /* -------------------------------------------------------------------------- */
@@ -106,7 +101,7 @@ resource "aws_cloudwatch_log_metric_filter" "this" {
 resource "aws_cloudtrail" "this" {
   count = var.is_create_monitor_trail ? 1 : 0
 
-  name                          = "${local.name}-${data.aws_caller_identity.current.account_id}"
+  name                          = "${local.name}-${data.aws_caller_identity.this.account_id}"
   s3_bucket_name                = local.account_mode == 0 && var.centralize_trail_bucket_name == "" ? module.centralize_log_bucket[count.index].bucket_name : var.centralize_trail_bucket_name
   include_global_service_events = var.include_global_service_events
   cloud_watch_logs_group_arn    = "${aws_cloudwatch_log_group.trail_log[count.index].arn}:*"
@@ -129,5 +124,6 @@ resource "aws_cloudtrail" "this" {
       }
     }
   }
-  tags = merge(local.tags, { Name = "${local.name}-${data.aws_caller_identity.current.account_id}" })
+
+  tags = merge(local.tags, { Name = "${local.name}-${data.aws_caller_identity.this.account_id}" })
 }

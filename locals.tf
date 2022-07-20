@@ -5,7 +5,7 @@ locals {
 
   name = "${var.prefix}-${var.environment}-trail"
 
-  account_ids = concat(var.spoke_account_ids, [data.aws_caller_identity.current.account_id])
+  account_ids = concat(var.spoke_account_ids, [data.aws_caller_identity.this.account_id])
 
   policy_identifiers = [for account in local.account_ids : join("", ["arn:aws:iam::", account, ":root"])]
 
