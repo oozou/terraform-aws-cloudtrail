@@ -11,6 +11,8 @@ All notable changes to this module will be documented in this file.
     - Add `var.additional_cloudwatch_log_metric_filters` to override or add additional custom metric filter
     - Add cloudwatch alarm action `var.default_alarm_actions` to override all actions for all metric filter
 - Rename `data.aws_region` from `current` to `this`
+- Rename `var.cloudtrail_encrypted` to `is_cloudtrail_encrypted`
+
 ## [1.0.3] - 2022-07-18
 
 ### Changed
