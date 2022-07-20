@@ -118,16 +118,16 @@ module "spoke_cloudtrail" {
 
 ## Providers
 
-| Name                                              | Version  |
-|---------------------------------------------------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0.0 |
+| Name                                              | Version |
+|---------------------------------------------------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.22.0  |
 
 ## Modules
 
 | Name                                                                                                    | Source                                              | Version                  |
 |---------------------------------------------------------------------------------------------------------|-----------------------------------------------------|--------------------------|
 | <a name="module_alarm"></a> [alarm](#module\_alarm)                                                     | git@github.com:oozou/terraform-aws-cloudwatch-alarm | feature/cloudwatch-alarm |
-| <a name="module_centralize_log_bucket"></a> [centralize\_log\_bucket](#module\_centralize\_log\_bucket) | git@github.com:oozou/terraform-aws-s3               | v1.0.1                   |
+| <a name="module_centralize_log_bucket"></a> [centralize\_log\_bucket](#module\_centralize\_log\_bucket) | git@github.com:oozou/terraform-aws-s3               | v1.0.4                   |
 | <a name="module_cloudtrail_kms"></a> [cloudtrail\_kms](#module\_cloudtrail\_kms)                        | git@github.com:oozou/terraform-aws-kms-key.git      | v1.0.0                   |
 
 ## Resources
@@ -139,10 +139,10 @@ module "spoke_cloudtrail" {
 | [aws_cloudwatch_log_metric_filter.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_metric_filter) | resource    |
 | [aws_iam_policy.cloudtrail_put_log_cw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy)                    | resource    |
 | [aws_iam_role.cloudtrail_put_log_cw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                        | resource    |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)                     | data source |
+| [aws_caller_identity.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)                        | data source |
 | [aws_iam_policy_document.kms_cloudtrail](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document)      | data source |
 | [aws_iam_policy_document.s3_cloudtrail](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document)       | data source |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region)                                       | data source |
+| [aws_region.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region)                                          | data source |
 
 ## Inputs
 
