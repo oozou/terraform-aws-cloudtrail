@@ -11,3 +11,23 @@ All notable changes to this module will be documented in this file.
     - Add `var.additional_cloudwatch_log_metric_filters` to override or add additional custom metric filter
     - Add cloudwatch alarm action `var.default_alarm_actions` to override all actions for all metric filter
 - Rename `data.aws_region` from `current` to `this`
+
+## [1.0.2] - 2022-07-12
+
+### Changed
+
+- module s3 version from `1.0.1` to `1.0.4` to remove deprecated-variable
+
+## [1.0.1] - 2022-06-30
+
+### Added
+
+- support log retension
+- fix kms-security-issue
+
+
+## [1.0.0] - 2022-03-17
+
+### Added
+
+- init terraform-aws-cloudtrail module
