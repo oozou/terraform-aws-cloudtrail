@@ -62,7 +62,7 @@ resource "aws_cloudwatch_log_group" "trail_log" {
 module "alarm" {
   for_each = var.is_create_monitor_trail ? toset(local.enable_cloudwatch_log_metric_filters) : toset([])
 
-  source = "git@github.com:oozou/terraform-aws-cloudwatch-alarm?ref=feature/cloudwatch-alarm"
+  source = "git@github.com:oozou/terraform-aws-cloudwatch-alarm?ref=v1.0.0"
 
   prefix      = var.prefix
   environment = var.environment
