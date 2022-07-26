@@ -12,6 +12,7 @@ All notable changes to this module will be documented in this file.
     - Add cloudwatch alarm action `var.default_alarm_actions` to override all actions for all metric filter
 - Rename `data.aws_region` from `current` to `this`
 - Rename `var.cloudtrail_encrypted` to `is_cloudtrail_encrypted`
+- For s3 module `centralize_log_bucket`, policy is updated to force SSL connection of trail
 
 ## [1.0.3] - 2022-07-18
 
