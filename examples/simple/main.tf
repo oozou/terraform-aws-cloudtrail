@@ -21,7 +21,5 @@ module "hub_cloudtrail" {
     read_write_type           = "All"
   }]
 
-  # centralize_trail_bucket_lifecycle_rule = var.centralize_trail_bucket_lifecycle_rule
-
   tags = var.custom_tags
 }
