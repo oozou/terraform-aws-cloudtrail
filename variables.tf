@@ -32,7 +32,49 @@ variable "cloudwatch_log_retention_in_days" {
   default     = 365
 }
 
-variable "cloudtrail_encrypted" {
+variable "additional_cloudwatch_log_metric_filters" {
+  description = "(optional) Additional cloudwatch log filter"
+  type        = any
+  default     = {}
+}
+
+variable "enable_cloudwatch_log_metric_filters" {
+  description = "(optional) list of metrics filter to enable"
+  type        = list(string)
+  default     = []
+  validation {
+    condition = alltrue([
+      for value in var.enable_cloudwatch_log_metric_filters : contains(
+        [
+          "authorization_failures",
+          "cloudtrail_changes",
+          "config_activity",
+          "console_signin_failures",
+          "console_signin_without_mfa",
+          "deleted_kms_cmk_activity",
+          "gateway_changes",
+          "iam_policy_changes",
+          "network_acl_events",
+          "root_account_usage",
+          "s3_bucket_activity",
+          "security_group_events",
+          "vpc_changes",
+          "vpc_route_table_changes"
+        ],
+        value
+      )
+    ])
+    error_message = "The given value is not valid choice."
+  }
+}
+
+variable "default_alarm_actions" {
+  description = "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN)."
+  type        = list(string)
+  default     = []
+}
+
+variable "is_cloudtrail_encrypted" {
   description = "Whether Cloudtrail encryption enable or not."
   type        = bool
   default     = true
@@ -109,7 +151,6 @@ variable "spoke_account_ids" {
 /* -------------------------------------------------------------------------- */
 /*                                  S3 Bucket                                 */
 /* -------------------------------------------------------------------------- */
-
 variable "centralize_trail_bucket_lifecycle_rule" {
   description = "List of lifecycle rules to transition the data. Leave empty to disable this feature. storage_class can be STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE"
   type = list(object({
