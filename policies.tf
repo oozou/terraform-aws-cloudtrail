@@ -185,3 +185,24 @@ data "aws_iam_policy_document" "s3_cloudtrail" {
     }
   }
 }
+
+data "aws_iam_policy_document" "force_ssl_s3_communication" {
+  # S3 buckets should require requests to use Secure Socket Layer
+  statement {
+    sid = "DenyNonSSLRequests"
+    actions = [
+      "s3:*",
+    ]
+    effect    = "Deny"
+    resources = [local.centralize_log_bucket_arn]
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["false"]
+    }
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+  }
+}
