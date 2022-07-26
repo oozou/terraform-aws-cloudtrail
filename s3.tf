@@ -1,6 +1,6 @@
 module "centralize_log_bucket" {
   count  = 1 - local.account_mode
-  source = "git@github.com:oozou/terraform-aws-s3?ref=v1.0.4"
+  source = "git@github.com:oozou/terraform-aws-s3?ref=v1.1.1"
 
   prefix      = var.prefix
   bucket_name = "account-trail"
