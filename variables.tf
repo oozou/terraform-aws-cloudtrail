@@ -151,7 +151,6 @@ variable "spoke_account_ids" {
 /* -------------------------------------------------------------------------- */
 /*                                  S3 Bucket                                 */
 /* -------------------------------------------------------------------------- */
-
 variable "centralize_trail_bucket_lifecycle_rule" {
   description = "List of lifecycle rules to transition the data. Leave empty to disable this feature. storage_class can be STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE"
   type = list(object({
