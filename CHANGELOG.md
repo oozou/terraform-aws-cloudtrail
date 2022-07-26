@@ -2,6 +2,12 @@
 
 All notable changes to this module will be documented in this file.
 
+## [1.0.5] - 2022-07-26
+
+### Changed
+
+- Update module `centralize_log_bucket` to version v1.1.1 due to s3 security issue
+
 ## [1.0.4] - 2022-07-26
 
 ### Changed
