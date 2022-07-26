@@ -42,10 +42,7 @@ data "aws_iam_policy_document" "kms_cloudtrail" {
     condition {
       test     = "ArnLike"
       variable = "kms:EncryptionContext:aws:logs:arn"
-      values = concat(
-        ["arn:aws:logs:${data.aws_region.this.name}:*:log-group:/aws/cloudtrail/${var.prefix}-*"],
-        [for account in local.account_ids : join("", ["arn:aws:logs:*:", account, ":log-group:/aws/cloudtrail/${var.prefix}-*"])]
-      )
+      values   = ["arn:aws:logs:${data.aws_region.this.name}:*:log-group:/aws/cloudtrail/${var.prefix}-*"]
     }
   }
 
