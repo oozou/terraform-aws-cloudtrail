@@ -13,6 +13,7 @@ All notable changes to this module will be documented in this file.
 - Rename `data.aws_region` from `current` to `this`
 - Rename `var.cloudtrail_encrypted` to `is_cloudtrail_encrypted`
 - For s3 module `centralize_log_bucket`, policy is updated to force SSL connection of trail
+- Add example for simple usage
 
 ## [1.0.3] - 2022-07-18
 
