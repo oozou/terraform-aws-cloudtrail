@@ -12,9 +12,9 @@ No providers.
 
 ## Modules
 
-| Name                                                                       | Source | Version |
-|----------------------------------------------------------------------------|--------|---------|
-| <a name="module_simple_alarm"></a> [simple\_alarm](#module\_simple\_alarm) | ../../ | n/a     |
+| Name                                                                             | Source | Version |
+|----------------------------------------------------------------------------------|--------|---------|
+| <a name="module_hub_cloudtrail"></a> [hub\_cloudtrail](#module\_hub\_cloudtrail) | ../../ | n/a     |
 
 ## Resources
 
@@ -26,7 +26,6 @@ No resources.
 |-----------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------|---------|:--------:|
 | <a name="input_custom_tags"></a> [custom\_tags](#input\_custom\_tags) | Custom tags which can be passed on to the AWS resources. They should be key value pairs having distinct keys | `map(any)` | `{}`    |    no    |
 | <a name="input_environment"></a> [environment](#input\_environment)   | Environment Variable used as a prefix                                                                        | `string`   | n/a     |   yes    |
-| <a name="input_name"></a> [name](#input\_name)                        | Name of the ECS cluster and s3 also redis to create                                                          | `string`   | n/a     |   yes    |
 | <a name="input_prefix"></a> [prefix](#input\_prefix)                  | The prefix name of customer to be displayed in AWS console and resource                                      | `string`   | n/a     |   yes    |
 
 ## Outputs
