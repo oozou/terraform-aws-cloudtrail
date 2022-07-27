@@ -194,7 +194,7 @@ data "aws_iam_policy_document" "force_ssl_s3_communication" {
       "s3:*",
     ]
     effect    = "Deny"
-    resources = [local.centralize_log_bucket_arn]
+    resources = [local.centralize_log_bucket_arn, "${local.centralize_log_bucket_arn}/*"]
     condition {
       test     = "Bool"
       variable = "aws:SecureTransport"
