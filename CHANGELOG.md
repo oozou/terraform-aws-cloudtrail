@@ -7,6 +7,7 @@ All notable changes to this module will be documented in this file.
 ### Changed
 
 - In DenyNonSSLRequests policies, we update to `<s3_arn>` and `<s3_arn>/*` for best practice when hardening policies enable.
+- Update module `centralize_log_bucket` from version v1.1.1 to v1.1.2
 
 ## [1.0.5] - 2022-07-26
 
