@@ -2,9 +2,11 @@
 /*                                   AWS_KMS                                  */
 /* -------------------------------------------------------------------------- */
 module "cloudtrail_kms" {
+  source  = "oozou/kms-key/aws"
+  version = "1.0.0"
+
   count = 1 - local.account_mode
 
-  source      = "git@github.com:oozou/terraform-aws-kms-key.git?ref=v1.0.0"
   key_type    = "service"
   description = "Used to encrypt data in for account centralize monitor trail"
   prefix      = var.prefix

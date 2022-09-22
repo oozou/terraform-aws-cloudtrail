@@ -6,7 +6,8 @@
 
 ```terraform
 module "hub_cloudtrail" {
-  source = "git@github.com:oozou/terraform-aws-cloudtrail.git?ref=<ref_id>"
+  source  = "oozou/cloudtrail/aws"
+  version = "<version>"
 
   prefix       = "<customer_name>"
   environment  = "devops"
@@ -79,7 +80,8 @@ module "hub_cloudtrail" {
 
 ```terraform
 module "spoke_cloudtrail" {
-  source = "git@github.com:oozou/terraform-aws-cloudtrail.git?ref=<ref_id>"
+  source  = "oozou/cloudtrail/aws"
+  version = "<version>"
 
   prefix = "<customer_name>"
   environment = "dev"
@@ -124,11 +126,11 @@ module "spoke_cloudtrail" {
 
 ## Modules
 
-| Name                                                                                                    | Source                                              | Version |
-|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------|---------|
-| <a name="module_alarm"></a> [alarm](#module\_alarm)                                                     | git@github.com:oozou/terraform-aws-cloudwatch-alarm | v1.0.0  |
-| <a name="module_centralize_log_bucket"></a> [centralize\_log\_bucket](#module\_centralize\_log\_bucket) | git@github.com:oozou/terraform-aws-s3               | v1.1.2  |
-| <a name="module_cloudtrail_kms"></a> [cloudtrail\_kms](#module\_cloudtrail\_kms)                        | git@github.com:oozou/terraform-aws-kms-key.git      | v1.0.0  |
+| Name                                                                                                    | Source                     | Version |
+|---------------------------------------------------------------------------------------------------------|----------------------------|---------|
+| <a name="module_alarm"></a> [alarm](#module\_alarm)                                                     | oozou/cloudwatch-alarm/aws | 1.0.0   |
+| <a name="module_centralize_log_bucket"></a> [centralize\_log\_bucket](#module\_centralize\_log\_bucket) | oozou/s3/aws               | 1.1.3   |
+| <a name="module_cloudtrail_kms"></a> [cloudtrail\_kms](#module\_cloudtrail\_kms)                        | oozou/kms-key/aws          | 1.0.0   |
 
 ## Resources
 
