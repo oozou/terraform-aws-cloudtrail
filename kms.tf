@@ -5,7 +5,7 @@ module "cloudtrail_kms" {
   source  = "oozou/kms-key/aws"
   version = "1.0.0"
 
-  count = var.kms_key_id == "" ? 1 - local.account_mode : 0
+  count = local.is_create_cloudtrail_kms ? 1 : 0
 
   key_type    = "service"
   description = "Used to encrypt data in for account centralize monitor trail"

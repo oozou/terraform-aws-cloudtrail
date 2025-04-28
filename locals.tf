@@ -13,6 +13,8 @@ locals {
 
   centralize_log_bucket_arn = var.centralize_trail_bucket_name == "" ? try(module.centralize_log_bucket[0].bucket_arn, "") : join("", ["arn:aws:s3:::", var.centralize_trail_bucket_name])
 
+  is_create_cloudtrail_kms = var.kms_key_id == "" && local.account_mode == 0
+  
   tags = merge(
     {
       Terraform   = true
