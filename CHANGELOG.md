@@ -2,6 +2,12 @@
 
 All notable changes to this module will be documented in this file.
 
+## [v1.0.8] - 2025-04-28
+
+### Changed
+
+- Update KMS module condition
+
 ## [v1.0.7] - 2022-09-22
 
 ### Changed
